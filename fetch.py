@@ -45,7 +45,7 @@ def fetch_and_store():
                         "airline": "Ryanair",
                         "price_eur": float(f.price),
                     }
-                    supabase.table("price_snapshots").insert(row).execute()
+                    supabase.table("price_snapshots").upsert(row, on_conflict="snapshot_date,flight_date,flight_number,origin,destination").execute()
                     print(f"  {f.flightNumber} {f.departureTime} {f.price} EUR")
             except Exception as e:
                 print(f"  Fel: {e}")
