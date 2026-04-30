@@ -7,7 +7,7 @@ from supabase import create_client
 
 # Konfiguration
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
-SUPABASE_ANON_KEY = os.environ.get("SUPABASE_ANON_KEY")
+SUPABASE_SECRET_KEY = os.environ.get("SUPABASE_SECRET_KEY")
 
 ROUTES = [
     ("ARN", "ALC"),
@@ -22,7 +22,7 @@ def get_dates():
 
 def fetch_and_store():
     api = Ryanair("EUR")
-    supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
+    supabase = create_client(SUPABASE_URL, SUPABASE_SECRET_KEY)
     snapshot_date = datetime.today().date()
 
     for origin, destination in ROUTES:
